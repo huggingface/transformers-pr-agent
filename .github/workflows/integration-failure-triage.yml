@@ -17,10 +17,6 @@ permissions:
   contents: read
   id-token: write   # required to mint the GitHub Actions OIDC token for Serge
 
-concurrency:
-  group: integration-failure-triage
-  cancel-in-progress: false
-
 jobs:
   triage:
     # GitHub-hosted runners are not available to this org repo; use the same
