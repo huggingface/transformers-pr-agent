@@ -49,7 +49,8 @@ Usage:
         --serge-url "$SERGE_URL" --base-ref main
 
 Environment:
-    HF_TOKEN           read access to the (private) CI dataset.
+    HF_TOKEN           optional. The CI dataset is public, so anonymous access
+                       works; only set this if the dataset is ever gated.
     SERGE_OIDC_TOKEN   GitHub Actions OIDC JWT (aud=serge) used as the bearer
                        token for ``POST /tasks``. Required unless --dry-run.
 """

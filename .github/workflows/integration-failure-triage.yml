@@ -68,7 +68,6 @@ jobs:
             --report-out triage-report.md \
             ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }}
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           SERGE_URL: ${{ vars.SERGE_URL || 'https://serge.huggingface.tech' }}
           SERGE_OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
 
