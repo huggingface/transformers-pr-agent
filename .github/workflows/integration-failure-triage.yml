@@ -23,7 +23,11 @@ concurrency:
 
 jobs:
   triage:
-    runs-on: ubuntu-latest
+    # GitHub-hosted runners are not available to this org repo; use the same
+    # general-purpose CPU self-hosted group the nightlies use. It is on the HF
+    # network, so it reaches the internal Serge URL directly (no Tailscale).
+    runs-on:
+      group: aws-general-8-plus
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,15 +39,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install "huggingface_hub>=0.25"
-
-      # Serge is served on an internal URL, reachable only over the VPN.
-      - name: Connect to Tailscale
-        uses: tailscale/github-action@v4
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID_AI_REVIEW }}
-          oauth-secret: ${{ secrets.TS_AUDIENCE_AI_REVIEW }}
-          tags: tag:ci
-          args: --accept-dns=false
 
       - name: Mint Serge OIDC token
         id: oidc
